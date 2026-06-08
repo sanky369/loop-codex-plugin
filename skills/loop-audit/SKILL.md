@@ -29,6 +29,9 @@ Review Loop's local state and return concrete findings ordered by risk.
    - unsafe write/deploy/send permissions
    - stale project profile assumptions
    - cost or cadence problems
+   - missing `.loop/loop.md` default prompt
+   - automations that do more than one pass per firing
+   - recurring prompts that lack pause conditions
 6. Recommend specific edits to loop specs or profile.
 
 ## Review Standard

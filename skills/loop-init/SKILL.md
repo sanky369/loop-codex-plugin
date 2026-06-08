@@ -9,7 +9,7 @@ Use this skill when the user asks to set up Loop, initialize loop engineering fo
 
 ## Goal
 
-Create a project-specific Loop profile at `.loop/loop.yaml`. This file is the durable contract other Loop skills read before designing, running, or auditing loops.
+Create a project-specific Loop profile at `.loop/loop.yaml` and a default bare-loop prompt at `.loop/loop.md`. These files are the durable contract other Loop skills read before designing, running, watching, or auditing loops.
 
 ## Workflow
 
@@ -20,7 +20,7 @@ Create a project-specific Loop profile at `.loop/loop.yaml`. This file is the du
    python3 <plugin-root>/scripts/project_probe.py --root <project-root> --write
    ```
 
-3. Read the generated `.loop/loop.yaml`.
+3. Read the generated `.loop/loop.yaml` and `.loop/loop.md`.
 4. If important commands are missing, inspect common project files and fill in conservative defaults.
 5. Report:
    - project type and stack
@@ -44,10 +44,12 @@ The profile should include:
 - `verification.required`
 - `safety.write_boundaries`
 - `state.run_ledger`
+- `state.default_prompt`
 - `recommended_loops`
+- `runtime.loop_shape`
 
 ## Safety
 
-Do not create recurring automations from this skill. This skill only creates the project profile.
+Do not create recurring automations from this skill. This skill only creates the project profile and default loop prompt.
 
 If the repo has uncommitted changes, note that future loop runs should prefer worktree isolation.

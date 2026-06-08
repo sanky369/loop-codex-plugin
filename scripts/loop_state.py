@@ -30,7 +30,17 @@ def read_runs(root: Path) -> list[dict[str, Any]]:
     return runs
 
 
-def append_run(root: Path, loop: str, status: str, summary: str, evidence: list[str]) -> None:
+def append_run(
+    root: Path,
+    loop: str,
+    status: str,
+    summary: str,
+    evidence: list[str],
+    prompt: str | None,
+    cadence: str | None,
+    next_action: str | None,
+    pause_reason: str | None,
+) -> None:
     path = ledger_path(root)
     path.parent.mkdir(parents=True, exist_ok=True)
     entry = {
@@ -40,6 +50,14 @@ def append_run(root: Path, loop: str, status: str, summary: str, evidence: list[
         "summary": summary,
         "evidence": evidence,
     }
+    if prompt:
+        entry["prompt"] = prompt
+    if cadence:
+        entry["cadence"] = cadence
+    if next_action:
+        entry["next_action"] = next_action
+    if pause_reason:
+        entry["pause_reason"] = pause_reason
     with path.open("a") as handle:
         handle.write(json.dumps(entry, sort_keys=True) + "\n")
     print(json.dumps(entry, indent=2))
@@ -74,9 +92,13 @@ def main() -> int:
     append = sub.add_parser("append")
     append.add_argument("--root", default=".")
     append.add_argument("--loop", required=True)
-    append.add_argument("--status", required=True, choices=["passed", "failed", "noop", "blocked"])
+    append.add_argument("--status", required=True, choices=["passed", "failed", "noop", "blocked", "completed", "paused"])
     append.add_argument("--summary", required=True)
     append.add_argument("--evidence", action="append", default=[])
+    append.add_argument("--prompt")
+    append.add_argument("--cadence")
+    append.add_argument("--next-action")
+    append.add_argument("--pause-reason")
 
     summary = sub.add_parser("summary")
     summary.add_argument("--root", default=".")
@@ -84,7 +106,17 @@ def main() -> int:
     args = parser.parse_args()
     root = Path(args.root).expanduser().resolve()
     if args.command == "append":
-        append_run(root, args.loop, args.status, args.summary, args.evidence)
+        append_run(
+            root,
+            args.loop,
+            args.status,
+            args.summary,
+            args.evidence,
+            args.prompt,
+            args.cadence,
+            args.next_action,
+            args.pause_reason,
+        )
     elif args.command == "summary":
         print_summary(root)
     return 0

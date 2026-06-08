@@ -1,24 +1,26 @@
 {
   "name": "loop",
   "version": "0.1.0",
-  "description": "Design and run project-specific closed loops for Codex work.",
+  "description": "Run Claude-style prompt loops and project-specific closed loops for Codex work.",
   "author": {
     "name": "Sanket Dongre"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Loop",
-    "shortDescription": "Turn recurring project work into Codex loops.",
-    "longDescription": "Loop helps Codex inspect a project, design closed-loop workflows, execute a manual loop pass, draft recurring automations, and audit loop runs for verification quality, safety, and cost.",
+    "shortDescription": "Run recurring prompt loops with verification.",
+    "longDescription": "Loop helps Codex inspect a project, create a default loop prompt, run one bounded loop pass, draft Claude-style recurring prompt automations, design project-specific loop specs, and audit loop runs for verification quality, safety, cadence, and cost.",
     "developerName": "Sanket Dongre",
     "category": "Productivity",
     "capabilities": [
       "Project analysis",
+      "Default loop prompts",
+      "Recurring prompt loops",
       "Workflow design",
       "Verification gates",
       "Automation prompts",
       "Run audit"
     ],
-    "defaultPrompt": "$loop-init Analyze this project and create a Loop profile."
+    "defaultPrompt": "$loop-init Analyze this project and create a Loop profile plus .loop/loop.md default prompt."
   }
 }

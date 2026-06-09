@@ -15,6 +15,10 @@ def ledger_path(root: Path) -> Path:
     return root / ".loop" / "runs.jsonl"
 
 
+def state_file(root: Path, name: str) -> Path:
+    return root / ".loop" / name
+
+
 def read_runs(root: Path) -> list[dict[str, Any]]:
     path = ledger_path(root)
     if not path.exists():
@@ -83,6 +87,31 @@ def print_summary(root: Path) -> None:
         print("recent:")
         for run in runs[-5:]:
             print(f"  - {run.get('timestamp')} {run.get('loop')} {run.get('status')}: {run.get('summary')}")
+        repeated = repeated_failures(runs)
+        if repeated:
+            print("repeated_failures:")
+            for key, count in repeated.items():
+                print(f"  {key}: {count}")
+
+
+def repeated_failures(runs: list[dict[str, Any]]) -> dict[str, int]:
+    counts: Counter[str] = Counter()
+    for run in runs[-20:]:
+        status = str(run.get("status", ""))
+        if status not in {"failed", "blocked"}:
+            continue
+        key = str(run.get("pause_reason") or run.get("summary") or "unknown")
+        counts[key] += 1
+    return {key: count for key, count in counts.items() if count >= 3}
+
+
+def append_markdown(root: Path, name: str, heading: str, body: str) -> None:
+    path = state_file(root, name)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now(timezone.utc).isoformat()
+    with path.open("a") as handle:
+        handle.write(f"\n## {heading} - {stamp}\n\n{body.strip()}\n")
+    print(str(path))
 
 
 def main() -> int:
@@ -103,6 +132,12 @@ def main() -> int:
     summary = sub.add_parser("summary")
     summary.add_argument("--root", default=".")
 
+    note = sub.add_parser("note")
+    note.add_argument("--root", default=".")
+    note.add_argument("--file", required=True, choices=["NEXT.md", "DECISIONS.md", "COMPREHENSION.md"])
+    note.add_argument("--heading", required=True)
+    note.add_argument("--body", required=True)
+
     args = parser.parse_args()
     root = Path(args.root).expanduser().resolve()
     if args.command == "append":
@@ -119,6 +154,8 @@ def main() -> int:
         )
     elif args.command == "summary":
         print_summary(root)
+    elif args.command == "note":
+        append_markdown(root, args.file, args.heading, args.body)
     return 0
 
 

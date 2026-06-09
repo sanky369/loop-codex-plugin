@@ -26,3 +26,11 @@ For each check, record:
 - credentials or production systems are involved
 - visual quality is subjective
 - generated content will be sent to people
+
+## Maker / Checker Split
+
+- Maker:
+- Checker:
+- Checker evidence:
+
+The loop cannot mark `passed` unless the checker can cite evidence from this run.

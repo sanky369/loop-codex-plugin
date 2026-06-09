@@ -8,6 +8,10 @@ What recurring work this loop owns.
 
 Manual, schedule, webhook, or project event.
 
+## Goal Contract
+
+Link to `.loop/goals/<goal>.md`, or define the exact done condition here.
+
 For Claude-style watch loops, specify whether this is:
 
 - interval + prompt
@@ -29,6 +33,10 @@ Excluded:
 
 How the loop finds work.
 
+Connectors required:
+
+- 
+
 ## Triage
 
 How the loop decides whether work is actionable.
@@ -36,6 +44,16 @@ How the loop decides whether work is actionable.
 ## Execution
 
 How the loop acts, including worktree and file boundaries.
+
+Worktree policy:
+
+- 
+
+Subagent plan:
+
+- Explorer:
+- Worker:
+- Verifier:
 
 Each scheduled firing runs one pass only:
 
@@ -45,6 +63,8 @@ Each scheduled firing runs one pass only:
 
 Commands and evidence required before success can be reported.
 
+The maker cannot be the only checker. Name the independent verifier or human review path.
+
 ## Reporting
 
 What the loop reports back to the user or project system.
@@ -52,6 +72,12 @@ What the loop reports back to the user or project system.
 ## State
 
 What gets appended to `.loop/runs.jsonl`.
+
+Also update:
+
+- `.loop/NEXT.md`
+- `.loop/DECISIONS.md`
+- `.loop/COMPREHENSION.md`
 
 Include prompt, cadence, checks, evidence, next action, and pause reason when applicable.
 
@@ -62,3 +88,7 @@ When to pause and ask for human input.
 ## Cost And Safety Limits
 
 Cadence, token, external action, and permission limits.
+
+## Comprehension Notes
+
+What the human engineer needs to understand before accepting or continuing the loop's output.

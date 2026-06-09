@@ -7,7 +7,7 @@ Thanks for helping improve Loop.
 Before opening a pull request, run:
 
 ```bash
-python3 -m py_compile scripts/project_probe.py scripts/loop_state.py
+python3 -m py_compile scripts/project_probe.py scripts/loop_prompt.py scripts/loop_state.py scripts/loop_agents.py scripts/loop_goal.py
 ```
 
 If you have Codex's plugin validator available, also run:
@@ -22,6 +22,9 @@ python3 /path/to/plugin-creator/scripts/validate_plugin.py .
 - Keep loop specs narrow and auditable.
 - Do not add automation behavior that can deploy, delete data, change billing, rotate secrets, or send messages without human approval.
 - Keep persistent state simple and inspectable.
+- Split maker and checker for loops that can edit code.
+- Add explicit goal contracts for loops that can report `passed`.
+- Record comprehension notes when loop output changes behavior or direction.
 - Improve project detection conservatively.
 
 ## Pull Request Notes

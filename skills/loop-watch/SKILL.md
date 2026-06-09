@@ -36,12 +36,13 @@ Forms that resolve the prompt from `.loop/loop.md` (or the built-in default) whe
    The JSON result includes `rule`, `interval`, `cadence_mode`, `cron`, `cadence_human`, `cron_note`, `prompt`, and the rendered `automation_prompt`.
 3. If `cron_note` is set, tell the user what cadence you rounded to and why before creating anything.
 4. If the parsed prompt names an existing `.loop/specs/<slug>.md`, read it as extra guidance.
-5. **Run one pass now** (mirrors `/loop` executing immediately): invoke `$loop-run` with the parsed prompt before scheduling, so the user sees a result this session and the first firing is not the first run. Skip the immediate run only if the user explicitly asked to "just schedule it."
-6. Create the recurring automation:
+5. If the loop will be edit-capable and `.codex/agents/loop-verifier.toml` is missing, recommend `$loop-agents` before scheduling.
+6. **Run one pass now** (mirrors `/loop` executing immediately): invoke `$loop-run` with the parsed prompt before scheduling, so the user sees a result this session and the first firing is not the first run. Skip the immediate run only if the user explicitly asked to "just schedule it."
+7. Create the recurring automation:
    - For **fixed** cadence, use the `cron` (or `cadence_human`) from the parser.
    - For **dynamic** cadence, schedule a conservative default cadence and instruct the pass to choose the next sensible interval; if the automation system supports per-run rescheduling, have `$loop-run` update the next schedule at the end of each pass.
    - If the `automation_update` tool is available, use it. Otherwise save the rendered `automation_prompt` to `.loop/automations/<slug>.md` and tell the user it is ready to create from the Codex Automations pane.
-7. Confirm back to the user: schedule (human + cron), the loop prompt, project path, worktree/sandbox expectations, reporting destination, and the pause/stop conditions.
+8. Confirm back to the user: schedule (human + cron), the loop prompt, project path, worktree/sandbox expectations, connector assumptions, reporting destination, and the pause/stop conditions.
 
 ## Durable vs one-off
 
@@ -65,6 +66,7 @@ Tell the user how to end the loop, and honor these in `$loop-run`:
 - If the user supplied an interval, preserve it exactly unless it must be rounded for cron; then report the rounding.
 - If the user supplied prompt only, pick the next sensible cadence after each pass rather than forcing a fixed schedule.
 - If the user supplied neither interval nor prompt, use `.loop/loop.md`.
+- For loops that can write code, require a goal contract and verifier pass before reporting `passed`.
 
 ## Automation Prompt Shape
 
@@ -82,7 +84,7 @@ Loop prompt:
 Run one pass only.
 Use `.loop/loop.yaml` for project commands, safety, and state.
 If a matching `.loop/specs/<slug>.md` exists, use it as extra guidance; otherwise execute the prompt directly.
-Record state in `.loop/runs.jsonl`.
+Record state in `.loop/runs.jsonl`, `.loop/NEXT.md`, and `.loop/COMPREHENSION.md` when relevant.
 Report findings with verification evidence.
 Pause if approval, credentials, deployment, destructive changes, or repeated failures are required.
 ```

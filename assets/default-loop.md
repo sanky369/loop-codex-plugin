@@ -8,6 +8,8 @@ Run one maintenance pass for this project.
 4. Prefer read-only checks first.
 5. If edits are needed, keep them narrow and run the required verification gates.
 6. Record the pass in `.loop/runs.jsonl`.
-7. Report what happened, evidence, and whether the loop should continue, pause, or wait for human input.
+7. Update `.loop/NEXT.md` with the next concrete task when useful.
+8. Update `.loop/COMPREHENSION.md` when the pass changes behavior, architecture, docs, or project direction.
+9. Report what happened, evidence, and whether the loop should continue, pause, or wait for human input.
 
 Do not start a new initiative outside the existing project direction. Do not deploy, delete, spend money, rotate secrets, send external messages, or make irreversible changes without explicit human approval.

@@ -9,7 +9,7 @@ Use this skill when the user asks to set up Loop, initialize loop engineering fo
 
 ## Goal
 
-Create a project-specific Loop profile at `.loop/loop.yaml` and a default bare-loop prompt at `.loop/loop.md`. These files are the durable contract other Loop skills read before designing, running, watching, or auditing loops.
+Create a project-specific Loop profile at `.loop/loop.yaml`, a default bare-loop prompt at `.loop/loop.md`, and starter memory files under `.loop/`. These files are the durable contract other Loop skills read before designing, running, watching, or auditing loops.
 
 ## Workflow
 
@@ -20,7 +20,7 @@ Create a project-specific Loop profile at `.loop/loop.yaml` and a default bare-l
    python3 <plugin-root>/scripts/project_probe.py --root <project-root> --write
    ```
 
-3. Read the generated `.loop/loop.yaml` and `.loop/loop.md`.
+3. Read the generated `.loop/loop.yaml`, `.loop/loop.md`, `.loop/NEXT.md`, `.loop/DECISIONS.md`, and `.loop/COMPREHENSION.md`.
 4. If important commands are missing, inspect common project files and fill in conservative defaults.
 5. Report:
    - project type and stack
@@ -47,6 +47,20 @@ The profile should include:
 - `state.default_prompt`
 - `recommended_loops`
 - `runtime.loop_shape`
+- `primitives.automations`
+- `primitives.worktrees`
+- `primitives.skills`
+- `primitives.connectors`
+- `primitives.subagents`
+- `primitives.state`
+
+## Follow-on Setup
+
+After initialization, recommend:
+
+- `$loop-goal` for the first verifiable done condition.
+- `$loop-agents` if the project will run edit-capable loops or unattended automations.
+- `$loop-design` for the first narrow recurring workflow.
 
 ## Safety
 

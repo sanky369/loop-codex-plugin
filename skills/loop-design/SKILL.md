@@ -19,22 +19,32 @@ Create a clear loop specification under `.loop/specs/<slug>.md` that Codex can e
 4. Create `.loop/specs/<slug>.md` with:
    - purpose
    - trigger
+   - goal contract
    - discovery phase
    - triage rules
    - execution rules
+   - maker/checker subagent plan
+   - connector requirements
+   - worktree/isolation policy
    - verification gates
    - reporting format
    - state updates
+   - comprehension update rules
    - stop/pause conditions
    - cost/safety limits
-5. Prefer narrow loops with strong verification over broad autonomous loops.
+5. If the loop lacks a verifiable done condition, create or recommend `$loop-goal`.
+6. If the loop can edit code unattended, create or recommend `$loop-agents`.
+7. Prefer narrow loops with strong verification over broad autonomous loops.
 
 ## Design Principles
 
 - Closed loop first: every action must feed into verification.
 - Worktree isolation for changes unless the user explicitly wants the local checkout touched.
+- Maker/checker split for unattended or risky loops.
+- Connectors are for real discovery and reporting; do not invent external state if the connector is unavailable.
 - Human approval for destructive, deploy, billing, credential, or send actions.
 - State is append-only: record what happened in `.loop/runs.jsonl`.
+- Comprehension is explicit: if the loop changes behavior or project direction, add a note to `.loop/COMPREHENSION.md`.
 - If a success condition cannot be verified by commands or direct inspection, mark it as requiring human review.
 
 ## Output

@@ -212,8 +212,10 @@ Loop prompt:
 
 Run one pass only.
 Use `.loop/loop.yaml` for project commands, safety, and state.
-If a matching `.loop/specs/<slug>.md` exists, use it as extra guidance; otherwise execute the prompt directly.
+If a matching `.loop/specs/<slug>.md` or `.loop/goals/<slug>.md` exists, use it as extra guidance; otherwise execute the prompt directly.
+For edit-capable loops, use the maker/checker split when `.codex/agents/loop-verifier.toml` exists.
 Record state in `.loop/runs.jsonl` with loop, status, prompt, cadence, checks, evidence, next action, and pause reason when relevant.
+Update `.loop/NEXT.md` and `.loop/COMPREHENSION.md` when the pass creates follow-up work or changes behavior, architecture, docs, or project direction.
 Report findings with verification evidence.
 Pause instead of continuing if the same failure repeats three times, credentials are missing, the scope expands, or human approval is required.
 """

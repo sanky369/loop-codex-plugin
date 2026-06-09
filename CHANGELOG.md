@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.1 - 2026-06-09
+
+- Added a custom Loop logo and composer icon.
+- Added plugin `brandColor`, `logo`, and `composerIcon` metadata.
+
 ## 0.2.0 - 2026-06-09
 
 - Added `$loop-agents` to generate project-scoped Codex subagents: explorer, worker, and verifier.

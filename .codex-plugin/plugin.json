@@ -1,6 +1,6 @@
 {
   "name": "loop",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Run Claude-style prompt loops and project-specific closed loops for Codex work.",
   "author": {
     "name": "Sanket Dongre"
@@ -23,6 +23,9 @@
       "Automation prompts",
       "Run audit"
     ],
-    "defaultPrompt": "$loop-init Analyze this project and create a Loop profile plus .loop/loop.md default prompt."
+    "defaultPrompt": "$loop-init Analyze this project and create a Loop profile plus .loop/loop.md default prompt.",
+    "brandColor": "#4F6BFF",
+    "composerIcon": "./assets/loop-icon.png",
+    "logo": "./assets/loop-logo.png"
   }
 }

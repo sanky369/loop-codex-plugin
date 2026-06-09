@@ -1,5 +1,7 @@
 # Loop for Codex
 
+![Loop logo](./assets/loop-logo.png)
+
 Loop is an open-source Codex plugin for **loop engineering**: turning recurring project work into closed loops that discover work, triage it, act, verify, report, and remember what happened.
 
 It now also supports a Claude-style `/loop` shape for prompt loops: give Loop an interval and a prompt, then let each scheduled firing run one bounded Codex pass with durable state and explicit stop conditions.

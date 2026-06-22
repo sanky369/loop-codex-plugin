@@ -1,6 +1,6 @@
 # Loop for Codex
 
-![Loop logo](./assets/loop-logo.png)
+![Loop for Codex banner](./assets/loop-banner.png)
 
 Loop is an open-source Codex plugin for **loop engineering**: turning recurring project work into closed loops that discover work, triage it, act, verify, report, and remember what happened.
 
@@ -318,7 +318,7 @@ python3 scripts/loop_state.py summary --root /path/to/project
 
 ## Status
 
-Loop is v0.2.0 and intentionally skills-first. It does not run a daemon or always-on background service. Recurrence should go through Codex Automations so scheduling, permissions, reporting, and user control stay native to Codex.
+Loop is v0.2.2 and intentionally skills-first. It does not run a daemon or always-on background service. Recurrence should go through Codex Automations so scheduling, permissions, reporting, and user control stay native to Codex.
 
 Each scheduled firing is designed to be one bounded Codex pass: inspect, act if appropriate, verify, record state, and decide whether to continue, pause, or stop.
 

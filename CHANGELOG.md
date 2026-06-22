@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.2.2 - 2026-06-22
+
+- Added a 16:9 README banner image for GitHub.
+- Registered the banner as a plugin screenshot asset.
+- Kept the square logo for Codex plugin metadata instead of rendering it huge in the README.
+
 ## 0.2.1 - 2026-06-09
 
 - Added a custom Loop logo and composer icon.
